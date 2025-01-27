@@ -15,7 +15,7 @@ import { Button } from '@/components/ui/button';
 // ====== Assets ====== //
 import { FcGoogle } from 'react-icons/fc';
 
-const LoginPage = () => {
+const SignupPage = () => {
     return (
         <div className='w-full h-screen flex bg-gray-100 p-3'>
             <div className='w-1/2'>
@@ -23,14 +23,14 @@ const LoginPage = () => {
             </div>
             <div className='w-1/2 rounded-xl bg-white p-8 flex justify-center items-center flex-col gap-6 relative'>
                 <div className='flex flex-col items-center gap-1'>
-                    <h1 className='text-3xl font-bold'>Welcome back!</h1>
+                    <h1 className='text-3xl font-bold'>Create an account</h1>
                     <p className='text-gray-500'>
-                        Please enter your credentials
+                        Sign up to get started with Quotely
                     </p>
                 </div>
                 <Card className='w-[400px]'>
                     <CardHeader>
-                        <CardTitle className='text-center'>Log in</CardTitle>
+                        <CardTitle className='text-center'>Sign Up</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <form>
@@ -53,14 +53,14 @@ const LoginPage = () => {
                             className='w-full font-bold   '
                         >
                             <FcGoogle size={20} />
-                            Log in with Google
+                            Sign up with Google
                         </Button>
                     </CardFooter>
                 </Card>
                 <p className='absolute bottom-6 mx-auto text-sm text-gray-500'>
-                    Don&apos;t have an account?&nbsp;
-                    <Link href='/signup' className='underline'>
-                        Sign up
+                    Already have an account?&nbsp;
+                    <Link href='/login' className='underline'>
+                        Sign in
                     </Link>
                 </p>
             </div>
@@ -68,4 +68,4 @@ const LoginPage = () => {
     );
 };
 
-export default LoginPage;
+export default SignupPage;
