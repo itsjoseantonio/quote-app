@@ -45,6 +45,8 @@ export const authOptions: AuthOptions = {
                         throw new Error('Invalid password');
                     }
 
+                    console.log(user, 'user.auth');
+
                     return user;
                 } catch (error) {
                     console.log(error, 'err');
@@ -55,4 +57,5 @@ export const authOptions: AuthOptions = {
     session: {
         strategy: 'jwt',
     },
+    secret: process.env.AUTH_SECRET!,
 };

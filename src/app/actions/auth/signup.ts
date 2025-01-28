@@ -7,6 +7,7 @@ import bcrypt from 'bcrypt';
 export const signup = async (formData: FormData) => {
     const email = formData.get('email');
     const password = formData.get('password');
+    const name = formData.get('name');
 
     if (!email || !password) {
         throw new Error('Email and password are required');
@@ -28,6 +29,7 @@ export const signup = async (formData: FormData) => {
             const newUser = await User.create({
                 email,
                 password: hashPassword,
+                name,
             });
 
             const plainObj = JSON.stringify(newUser.toObject());
