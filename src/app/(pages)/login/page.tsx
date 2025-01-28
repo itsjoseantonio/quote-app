@@ -11,11 +11,19 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
+import AuthButton from '@/components/buttons/AuthButton';
 
 // ====== Assets ====== //
 import { FcGoogle } from 'react-icons/fc';
 
-const LoginPage = () => {
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+
+const LoginPage = async () => {
+    const session = await getServerSession(authOptions);
+
+    console.log(session, 'session');
+
     return (
         <div className='w-full h-screen flex bg-gray-100 p-3'>
             <div className='w-1/2'>
@@ -48,13 +56,9 @@ const LoginPage = () => {
                     </CardContent>
                     <CardFooter className='flex flex-col gap-3'>
                         <Button className='w-full'>Submit</Button>
-                        <Button
-                            variant='outline'
-                            className='w-full font-bold   '
-                        >
+                        <AuthButton provider='google' label='Google'>
                             <FcGoogle size={20} />
-                            Log in with Google
-                        </Button>
+                        </AuthButton>
                     </CardFooter>
                 </Card>
                 <p className='absolute bottom-6 mx-auto text-sm text-gray-500'>
