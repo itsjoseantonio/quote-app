@@ -21,7 +21,7 @@ export const signup = async (formData: FormData) => {
         if (user) {
             return {
                 success: false,
-                message: 'User already exists',
+                message: 'Email is already in use',
             };
         } else {
             const hashPassword = await bcrypt.hash(password.toString(), 10);

@@ -1,18 +1,28 @@
 import { Button } from '@/components/ui/button';
+import { authOptions } from '@/lib/auth';
+import { getServerSession } from 'next-auth';
 import Link from 'next/link';
 
-const Header = () => {
+const Header = async () => {
+    const session = await getServerSession(authOptions);
+
     return (
         <header className='bg-white shadow-md py-3'>
             <div className='container mx-auto px-4 flex justify-between items-center'>
                 <h1 className='text-2xl font-bold text-gray-800'>Quotely</h1>
                 <div className='flex gap-2 items-center'>
-                    <Button>
-                        <Link href='/login'>Login</Link>
-                    </Button>
-                    <Button variant='outline'>
-                        <Link href='/signup'>Sign up</Link>
-                    </Button>
+                    {session ? (
+                        <div></div>
+                    ) : (
+                        <>
+                            <Button>
+                                <Link href='/login'>Login</Link>
+                            </Button>
+                            <Button variant='outline'>
+                                <Link href='/signup'>Sign up</Link>
+                            </Button>
+                        </>
+                    )}
                 </div>
             </div>
         </header>
