@@ -3,7 +3,9 @@ import SidebarApp from '@/components/SidebarApp';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
     return (
-        <SidebarProvider>
+        <SidebarProvider
+            style={{ '--sidebar-width': '14rem' } as React.CSSProperties}
+        >
             <SidebarApp />
             <main>{children}</main>
         </SidebarProvider>
