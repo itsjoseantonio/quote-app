@@ -1,7 +1,7 @@
 'use client';
 
 import { FormEvent } from 'react';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 // ====== Components ====== //
 import {
@@ -22,6 +22,7 @@ import { signIn } from 'next-auth/react';
 import { FcGoogle } from 'react-icons/fc';
 
 const LoginForm = () => {
+    const router = useRouter();
     const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.target as HTMLFormElement);
@@ -36,10 +37,10 @@ const LoginForm = () => {
                 toast.error('Invalid email or password');
             } else {
                 toast.success('Logged in successfully');
-                redirect('/');
+                router.push('/admin');
             }
         } catch (error) {
-            console.error(error);
+            console.log(error, 'error');
             toast.error('An error occurred');
         }
     };
