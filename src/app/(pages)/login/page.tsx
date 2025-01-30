@@ -3,11 +3,14 @@ import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import LoginForm from '@/components/forms/LoginForm';
+import { redirect } from 'next/navigation';
 
 const LoginPage = async () => {
     const session = await getServerSession(authOptions);
 
-    console.log(session, 'session');
+    if (session) {
+        redirect('/admin');
+    }
 
     return (
         <div className='w-full h-screen flex bg-gray-100 p-3'>
