@@ -73,12 +73,14 @@ const LoginForm = () => {
                         </div>
                     </div>
                 </CardContent>
-                <CardFooter className='flex flex-col gap-3'>
+                <CardFooter className='flex flex-col gap-3 pb-0'>
                     <Button className='w-full'>Submit</Button>
-                    <AuthButton provider='google' label='Google'>
-                        <FcGoogle size={20} />
-                    </AuthButton>
                 </CardFooter>
+                <div className='p-6 pt-3'>
+                    <AuthButton provider='google' label='Google'>
+                        <FcGoogle size={24} />
+                    </AuthButton>
+                </div>
             </form>
         </Card>
     );
