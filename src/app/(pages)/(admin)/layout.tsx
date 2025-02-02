@@ -7,7 +7,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             style={{ '--sidebar-width': '15rem' } as React.CSSProperties}
         >
             <SidebarApp />
-            <main>{children}</main>
+            <main className='w-full p-6'>{children}</main>
         </SidebarProvider>
     );
 };
