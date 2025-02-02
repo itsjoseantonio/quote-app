@@ -1,11 +1,22 @@
+import { getServerSession } from 'next-auth';
+
 // ====== Components ====== //
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { Session } from '@/types';
+import { redirect } from 'next/navigation';
 
-const ProfilePage = () => {
+const ProfilePage = async () => {
+    const session: Session | null = await getServerSession();
+    const user = session?.user;
+
+    if (!session) {
+        redirect('/');
+    }
+
     return (
         <div className='space-y-4'>
             <h1 className='text-2xl font-bold mb-3'>Edit Profile</h1>
@@ -23,7 +34,7 @@ const ProfilePage = () => {
                             <Label htmlFor='username'>Username</Label>
                             <Input
                                 id='username'
-                                defaultValue='@Antonio'
+                                defaultValue={user?.username}
                                 disabled
                             />
                         </div>
@@ -31,7 +42,7 @@ const ProfilePage = () => {
                             <Label htmlFor='email'>Email</Label>
                             <Input
                                 id='email'
-                                defaultValue='jos.valga@gmail.com'
+                                defaultValue={user?.email}
                                 disabled
                             />
                         </div>
@@ -39,7 +50,7 @@ const ProfilePage = () => {
                             <Label htmlFor='bio'>Bio</Label>
                             <Textarea
                                 id='bio'
-                                defaultValue='Web Developer & Content Creator'
+                                defaultValue={user?.bio}
                                 rows={3}
                             />
                         </div>
@@ -48,7 +59,7 @@ const ProfilePage = () => {
                             <Input
                                 id='avatar'
                                 type='url'
-                                defaultValue='/placeholder.svg?height=96&width=96'
+                                defaultValue={user?.image}
                             />
                         </div>
                         <Button type='submit'>Update Profile</Button>
