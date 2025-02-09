@@ -15,7 +15,7 @@ const SignupPage = () => {
                 <div className='flex flex-col items-center gap-1'>
                     <h1 className='text-3xl font-bold'>Create an account</h1>
                     <p className='text-gray-500'>
-                        Sign up to get started with Quotely
+                        Sign up to get started with <strong>Quotely</strong>
                     </p>
                 </div>
                 <SignupForm />

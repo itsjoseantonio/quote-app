@@ -18,6 +18,7 @@ export const login = async (formData: FormData) => {
 
     try {
         const user = await User.findOne({ email });
+        console.log(user, 'USER');
 
         if (!user) {
             return {
