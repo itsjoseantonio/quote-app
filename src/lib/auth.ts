@@ -6,6 +6,11 @@ import Credentials from 'next-auth/providers/credentials';
 import dbConnect from './dbConnect';
 import { User } from '@/app/models/User';
 import bcrypt from 'bcrypt';
+import { AdapterUser } from 'next-auth/adapters';
+
+export interface UserType extends AdapterUser {
+    usermame: string;
+}
 
 export const authOptions: AuthOptions = {
     adapter: MongoDBAdapter(client),
@@ -58,4 +63,14 @@ export const authOptions: AuthOptions = {
         strategy: 'jwt',
     },
     secret: process.env.AUTH_SECRET!,
+    callbacks: {
+        async signIn({ user, account, profile, email, credentials }) {
+            console.log(user, account, profile, email, credentials, 'CALLBACK');
+            if (!user.username) {
+                return '/auth/complete';
+            } else {
+                return '/admin';
+            }
+        },
+    },
 };

@@ -16,10 +16,10 @@ const Header = async () => {
                     ) : (
                         <>
                             <Button>
-                                <Link href='/login'>Login</Link>
+                                <Link href='/auth/login'>Login</Link>
                             </Button>
                             <Button variant='outline'>
-                                <Link href='/signup'>Sign up</Link>
+                                <Link href='/auth/signup'>Sign up</Link>
                             </Button>
                         </>
                     )}
