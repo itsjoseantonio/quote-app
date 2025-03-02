@@ -30,6 +30,9 @@ const UserSchema = new Schema({
         required: true,
         minlength: 8,
     },
+    emailVerified: {
+        type: Boolean,
+    },
 });
 
 export const User = models.User || model('User', UserSchema);

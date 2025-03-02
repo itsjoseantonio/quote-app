@@ -4,9 +4,10 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import LoginForm from '@/components/forms/LoginForm';
 import { redirect } from 'next/navigation';
+import { Session } from '@/types';
 
 const LoginPage = async () => {
-    const session = await getServerSession(authOptions);
+    const session: Session | null = await getServerSession(authOptions);
 
     if (session) {
         redirect('/admin');
