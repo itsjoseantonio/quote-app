@@ -50,8 +50,6 @@ export const authOptions: AuthOptions = {
                         throw new Error('Invalid password');
                     }
 
-                    console.log(user, 'user.auth');
-
                     return user;
                 } catch (error) {
                     console.log(error, 'err');
@@ -63,14 +61,4 @@ export const authOptions: AuthOptions = {
         strategy: 'jwt',
     },
     secret: process.env.AUTH_SECRET!,
-    callbacks: {
-        async signIn({ user, account, profile, email, credentials }) {
-            console.log(user, account, profile, email, credentials, 'CALLBACK');
-            if (!user.username) {
-                return '/auth/complete';
-            } else {
-                return '/admin';
-            }
-        },
-    },
 };

@@ -13,10 +13,22 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
+import { completeRegister } from '@/app/actions/auth/complete';
 
 const CompleteForm = () => {
     const handleComplete = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const formData = new FormData(e.target as HTMLFormElement);
+
+        console.log(formData, 'event');
+        console.log(e, 'event');
+
+        try {
+            const response = await completeRegister(formData);
+            console.log(response, 'RESPONSE');
+        } catch (error) {
+            console.log(error, 'error');
+        }
     };
 
     return (

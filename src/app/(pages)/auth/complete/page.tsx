@@ -1,7 +1,13 @@
 import Link from 'next/link';
 import CompleteForm from '@/components/forms/CompleteForm';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { Session } from '@/types';
 
-const CompletePage = () => {
+const CompletePage = async () => {
+    const session: Session | null = await getServerSession(authOptions);
+
+    console.log(session, 'Complete form');
     return (
         <>
             <div className='flex flex-col items-center gap-1'>
