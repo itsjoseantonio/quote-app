@@ -7,7 +7,7 @@ const LogoutButton = () => {
     return (
         <span
             title='Logout'
-            onClick={() => signOut()}
+            onClick={() => signOut({ callbackUrl: '/' })}
             className='cursor-pointer ml-auto'
         >
             <FaPowerOff size={20} />
