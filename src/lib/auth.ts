@@ -6,11 +6,6 @@ import Credentials from 'next-auth/providers/credentials';
 import dbConnect from './dbConnect';
 import { User } from '@/app/models/User';
 import bcrypt from 'bcrypt';
-import { AdapterUser } from 'next-auth/adapters';
-
-export interface UserType extends AdapterUser {
-    usermame: string;
-}
 
 export const authOptions: AuthOptions = {
     adapter: MongoDBAdapter(client),
@@ -57,6 +52,22 @@ export const authOptions: AuthOptions = {
             },
         }),
     ],
+    callbacks: {
+        async jwt({ token, user }) {
+            if (user) {
+                token.email = user.email;
+                token.username = user.username ?? null;
+            }
+            return token;
+        },
+        async session({ session, token }) {
+            if (session.user) {
+                session.user.email = token.email;
+                session.user.username = token.username;
+            }
+            return session;
+        },
+    },
     session: {
         strategy: 'jwt',
     },
