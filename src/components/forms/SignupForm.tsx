@@ -1,5 +1,9 @@
 import { FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-hot-toast';
+
+// ====== Server Actions ====== //
+import { signup } from '@/app/actions/auth/signup';
 
 // ====== Components ====== //
 import {
@@ -12,11 +16,9 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { toast } from 'react-hot-toast';
 
 // ====== Assets ====== //
 import { FcGoogle } from 'react-icons/fc';
-import { signup } from '@/app/actions/auth/signup';
 
 const SignupForm = () => {
     const router = useRouter();

@@ -1,7 +1,7 @@
 'use client';
 
-import { Button } from '../ui/button';
 import { signIn } from 'next-auth/react';
+import { Button } from '../ui/button';
 
 interface AuthButtonProps {
     provider: 'google' | 'github';

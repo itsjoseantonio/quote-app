@@ -1,7 +1,7 @@
 'use client';
 
-import { FaPowerOff } from 'react-icons/fa6';
 import { signOut } from 'next-auth/react';
+import { FaPowerOff } from 'react-icons/fa6';
 
 const LogoutButton = () => {
     return (

@@ -2,24 +2,22 @@
 
 import { FormEvent } from 'react';
 
+// ====== Server Actions ====== //
+import { updateProfile } from '@/app/actions/admin/updateProfile';
+
 // ====== Components ====== //
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { updateProfile } from '@/app/actions/admin/updateProfile';
-
 import { Session } from '@/types';
 
 const ProfileForm = ({ user }: Session) => {
-    console.log(user, 'USERRRRRR');
     const handleUpdateProfile = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const formData = new FormData(e.target as HTMLFormElement);
-
-        console.log(formData, 'formData');
 
         try {
             const response = await updateProfile(formData);

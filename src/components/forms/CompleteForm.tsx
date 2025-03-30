@@ -2,6 +2,10 @@
 
 import { FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-hot-toast';
+
+// ====== Server Actions ====== //
+import { completeRegister } from '@/app/actions/auth/complete';
 
 // ====== Components ====== //
 import {
@@ -14,8 +18,6 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { completeRegister } from '@/app/actions/auth/complete';
-import { toast } from 'react-hot-toast';
 
 const CompleteForm = () => {
     const router = useRouter();

@@ -2,6 +2,8 @@
 
 import { FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-hot-toast';
+import { signIn } from 'next-auth/react';
 
 // ====== Components ====== //
 import {
@@ -15,8 +17,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import AuthButton from '@/components/buttons/AuthButton';
-import { toast } from 'react-hot-toast';
-import { signIn } from 'next-auth/react';
 
 // ====== Assets ====== //
 import { FcGoogle } from 'react-icons/fc';
