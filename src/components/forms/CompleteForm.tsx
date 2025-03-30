@@ -1,6 +1,7 @@
 'use client';
 
 import { FormEvent } from 'react';
+import { useRouter } from 'next/navigation';
 
 // ====== Components ====== //
 import {
@@ -14,20 +15,26 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { completeRegister } from '@/app/actions/auth/complete';
+import { toast } from 'react-hot-toast';
 
 const CompleteForm = () => {
+    const router = useRouter();
     const handleComplete = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.target as HTMLFormElement);
 
-        console.log(formData, 'event');
-        console.log(e, 'event');
-
         try {
             const response = await completeRegister(formData);
-            console.log(response, 'RESPONSE');
+
+            if (!response.success) {
+                toast.error(response.message);
+            } else {
+                toast.success(response.message);
+                router.push('/admin');
+            }
         } catch (error) {
-            console.log(error, 'error');
+            console.error(error);
+            toast.error('An error occurred');
         }
     };
 
