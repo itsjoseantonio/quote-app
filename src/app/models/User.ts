@@ -9,13 +9,13 @@ const UserSchema = new Schema({
     },
     username: {
         type: String,
-        required: true,
+        required: false,
         unique: true,
         match: /^[a-zA-Z0-9_]+$/,
     },
     bio: {
         type: String,
-        required: true,
+        required: false,
         maxlength: 300,
         trim: true,
     },

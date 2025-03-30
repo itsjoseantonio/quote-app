@@ -1,4 +1,5 @@
 import { FormEvent } from 'react';
+import { useRouter } from 'next/navigation';
 
 // ====== Components ====== //
 import {
@@ -18,6 +19,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { signup } from '@/app/actions/auth/signup';
 
 const SignupForm = () => {
+    const router = useRouter();
     const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.target as HTMLFormElement);
@@ -28,6 +30,7 @@ const SignupForm = () => {
                 toast.error(response.message);
             } else {
                 toast.success(response.message);
+                router.push('/admin');
             }
         } catch (error) {
             console.error(error);

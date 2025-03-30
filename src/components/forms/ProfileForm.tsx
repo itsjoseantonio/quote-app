@@ -38,7 +38,7 @@ const ProfileForm = ({ user }: Session) => {
                 <form className='space-y-4' onSubmit={handleUpdateProfile}>
                     <div>
                         <Label htmlFor='name'>Name</Label>
-                        <Input id='name' defaultValue='José Antonio' />
+                        <Input id='name' defaultValue={user?.name} />
                     </div>
                     <div>
                         <Label htmlFor='username'>Username</Label>
