@@ -1,5 +1,11 @@
 'use client';
 
+import { toast } from 'react-hot-toast';
+
+// ====== Server Actions ====== //
+import { createQuote } from '@/app/actions/admin/quotes/createQuote';
+
+// ====== Components ====== //
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -11,7 +17,17 @@ const QuotesForm = () => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
 
-        console.log(formData, 'formData');
+        try {
+            const response = await createQuote(formData);
+
+            if (!response?.success) {
+                toast.error(response?.message || 'An error occurred');
+            } else {
+                toast.success(response.message);
+            }
+        } catch (error) {
+            console.error(error, 'error');
+        }
     };
 
     return (
