@@ -10,10 +10,8 @@ export default withAuth(
             secret: process.env.NEXTAUTH_SECRET,
         });
 
-        // 🚨 Check if the user is logged in
         if (token) {
             if (!token.username && pathname !== '/auth/complete') {
-                console.log('condition username');
                 return NextResponse.redirect(
                     new URL('/auth/complete', req.url)
                 );
