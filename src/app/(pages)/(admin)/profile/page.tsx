@@ -3,14 +3,21 @@ import { Session } from '@/types';
 import { redirect } from 'next/navigation';
 import ProfileForm from '@/components/forms/ProfileForm';
 import { authOptions } from '@/lib/auth';
+import { User } from '@/app/models/User';
 
 const ProfilePage = async () => {
     const session: Session | null = await getServerSession(authOptions);
-    const user = session?.user;
 
     if (!session) {
         redirect('/');
     }
+
+    const userDoc = await User.findById(session.user.id);
+
+    const user = {
+        ...userDoc.toObject(),
+        _id: userDoc._id.toString(),
+    };
 
     return (
         <div className='space-y-4'>

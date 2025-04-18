@@ -1,6 +1,7 @@
 'use client';
 
 import { FormEvent } from 'react';
+import { toast } from 'react-hot-toast';
 
 // ====== Server Actions ====== //
 import { updateProfile } from '@/app/actions/admin/updateProfile';
@@ -21,7 +22,11 @@ const ProfileForm = ({ user }: Session) => {
 
         try {
             const response = await updateProfile(formData);
-            console.log(response, 'response');
+            if (!response?.success) {
+                toast.error(response?.message || 'An error occurred');
+            } else {
+                toast.success(response.message);
+            }
         } catch (error) {
             console.log(error, 'error');
         }
@@ -36,7 +41,11 @@ const ProfileForm = ({ user }: Session) => {
                 <form className='space-y-4' onSubmit={handleUpdateProfile}>
                     <div>
                         <Label htmlFor='name'>Name</Label>
-                        <Input id='name' defaultValue={user?.name} />
+                        <Input
+                            id='name'
+                            name='name'
+                            defaultValue={user?.name}
+                        />
                     </div>
                     <div>
                         <Label htmlFor='username'>Username</Label>
@@ -48,7 +57,12 @@ const ProfileForm = ({ user }: Session) => {
                     </div>
                     <div>
                         <Label htmlFor='email'>Email</Label>
-                        <Input id='email' defaultValue={user?.email} disabled />
+                        <Input
+                            id='email'
+                            defaultValue={user?.email}
+                            name='email'
+                            disabled
+                        />
                     </div>
                     <div>
                         <Label htmlFor='bio'>Bio</Label>
