@@ -1,3 +1,4 @@
+// ====== Components ====== //
 import QuotesForm from '@/components/forms/QuotesForm';
 
 const QuotesPage = () => {

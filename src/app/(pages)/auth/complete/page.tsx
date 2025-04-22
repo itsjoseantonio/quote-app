@@ -1,8 +1,11 @@
 import Link from 'next/link';
-import CompleteForm from '@/components/forms/CompleteForm';
 import { getServerSession } from 'next-auth';
+
 import { authOptions } from '@/lib/auth';
 import { Session } from '@/types';
+
+// ====== Components ====== //
+import CompleteForm from '@/components/forms/CompleteForm';
 
 const CompletePage = async () => {
     const session: Session | null = await getServerSession(authOptions);

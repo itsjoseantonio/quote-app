@@ -1,8 +1,9 @@
-import { authOptions } from '@/lib/auth';
-import { Session } from '@/types';
+import React from 'react';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
-import React from 'react';
+
+import { authOptions } from '@/lib/auth';
+import { Session } from '@/types';
 
 const AdminPage = async () => {
     const session: Session | null = await getServerSession(authOptions);

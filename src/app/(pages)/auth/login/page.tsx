@@ -1,10 +1,12 @@
 import Link from 'next/link';
-
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
-import LoginForm from '@/components/forms/LoginForm';
 import { redirect } from 'next/navigation';
+
+import { authOptions } from '@/lib/auth';
 import { Session } from '@/types';
+
+// ====== Components ====== //
+import LoginForm from '@/components/forms/LoginForm';
 
 const LoginPage = async () => {
     const session: Session | null = await getServerSession(authOptions);

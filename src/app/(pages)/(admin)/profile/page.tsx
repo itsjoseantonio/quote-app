@@ -1,9 +1,13 @@
 import { getServerSession } from 'next-auth';
-import { Session } from '@/types';
 import { redirect } from 'next/navigation';
-import ProfileForm from '@/components/forms/ProfileForm';
+
+import { Session } from '@/types';
 import { authOptions } from '@/lib/auth';
 import { User } from '@/app/models/User';
+import dbConnect from '@/lib/dbConnect';
+
+// ====== Components ====== //
+import ProfileForm from '@/components/forms/ProfileForm';
 
 const ProfilePage = async () => {
     const session: Session | null = await getServerSession(authOptions);
@@ -12,6 +16,7 @@ const ProfilePage = async () => {
         redirect('/');
     }
 
+    await dbConnect();
     const userDoc = await User.findById(session.user.id);
 
     const user = {
