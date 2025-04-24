@@ -76,12 +76,12 @@ const LoginForm = () => {
                 <CardFooter className='flex flex-col gap-3 pb-0'>
                     <Button className='w-full'>Submit</Button>
                 </CardFooter>
-                <div className='p-6 pt-3'>
-                    <AuthButton provider='google' label='Google'>
-                        <FcGoogle size={24} />
-                    </AuthButton>
-                </div>
             </form>
+            <div className='p-6 pt-3'>
+                <AuthButton provider='google' label='Google'>
+                    <FcGoogle size={24} />
+                </AuthButton>
+            </div>
         </Card>
     );
 };
