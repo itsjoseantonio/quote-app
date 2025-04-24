@@ -1,8 +1,10 @@
 'use server';
 
+import { getServerSession } from 'next-auth';
+import { revalidatePath } from 'next/cache';
+
 import { Session } from '@/types';
 import dbConnect from '@/lib/dbConnect';
-import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { Quote } from '@/app/models/Quote';
 
@@ -31,6 +33,8 @@ export const createQuote = async (formData: FormData) => {
                 createdAt: newQuote.createdAt.toISOString(),
                 updatedAt: newQuote.updatedAt.toISOString(),
             };
+
+            revalidatePath('/quotes');
 
             return {
                 success: true,
