@@ -3,11 +3,17 @@ import { User } from '@/app/models/User';
 import { Quote } from '@/app/models/Quote';
 import Image from 'next/image';
 import QuoteCard from '@/components/QuoteCard';
+import { notFound } from 'next/navigation';
 
 const ProfilePage = async ({ params }: { params: { username: string } }) => {
     await dbConnect();
     const { username } = params;
     const userDoc = await User.findOne({ username });
+
+    if (!userDoc) {
+        return notFound();
+    }
+
     const user = {
         ...userDoc.toObject(),
         _id: userDoc._id.toString(),
