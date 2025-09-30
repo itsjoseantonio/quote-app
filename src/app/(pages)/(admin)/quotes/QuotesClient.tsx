@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { Quote } from '@/types';
 import QuotesForm from '@/components/forms/QuotesForm';
