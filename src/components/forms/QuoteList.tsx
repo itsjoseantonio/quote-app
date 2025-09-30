@@ -14,9 +14,10 @@ import ConfirmModal from '@/components/modals/ConfirmModal';
 
 interface QuoteListProps {
     quotes: Quote[];
+    handleEdit?: (quote: Quote) => void;
 }
 
-const QuoteList = ({ quotes }: QuoteListProps) => {
+const QuoteList = ({ quotes, handleEdit }: QuoteListProps) => {
     const [selectedQuoteId, setSelectedQuoteId] = useState<string | null>(null);
     const [showModal, setShowModal] = useState<boolean>(false);
 
@@ -38,8 +39,6 @@ const QuoteList = ({ quotes }: QuoteListProps) => {
         }
     };
 
-    console.log(selectedQuoteId, 'selectedQuoteId');
-
     return (
         <>
             <Card>
@@ -57,7 +56,15 @@ const QuoteList = ({ quotes }: QuoteListProps) => {
                                     {quote.quote} - {quote.author}
                                 </span>
                                 <div>
-                                    <Button variant='ghost' size='sm'>
+                                    <Button
+                                        variant='ghost'
+                                        size='sm'
+                                        onClick={
+                                            handleEdit
+                                                ? () => handleEdit(quote)
+                                                : undefined
+                                        }
+                                    >
                                         Edit
                                     </Button>
                                     <Button

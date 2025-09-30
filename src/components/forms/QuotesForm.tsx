@@ -12,7 +12,19 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 
-const QuotesForm = () => {
+interface QuotesFormProps {
+    mode?: 'create' | 'edit';
+    initialValues?: any | null;
+    onSave?: (data: any) => void;
+    handleCancel?: () => void;
+}
+
+const QuotesForm = ({
+    mode,
+    initialValues,
+    onSave,
+    handleCancel,
+}: QuotesFormProps) => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
@@ -30,6 +42,8 @@ const QuotesForm = () => {
         }
     };
 
+    const { quote, author, book } = initialValues || {};
+
     return (
         <div className='space-y-4'>
             <Card>
@@ -40,17 +54,39 @@ const QuotesForm = () => {
                     <form onSubmit={handleSubmit} className='space-y-4'>
                         <div>
                             <Label htmlFor='quote'>Quote</Label>
-                            <Textarea id='quote' name='quote' required />
+                            <Textarea
+                                id='quote'
+                                name='quote'
+                                required
+                                value={quote || ''}
+                            />
                         </div>
                         <div>
                             <Label htmlFor='author'>Author</Label>
-                            <Input id='author' name='author' required />
+                            <Input
+                                id='author'
+                                name='author'
+                                value={author || ''}
+                                required
+                            />
                         </div>
                         <div>
                             <Label htmlFor='book'>Book</Label>
-                            <Input id='book' name='book' required />
+                            <Input
+                                id='book'
+                                name='book'
+                                value={book || ''}
+                                required
+                            />
                         </div>
-                        <Button type='submit'>Add Quote</Button>
+                        {mode === 'create' ? (
+                            <Button type='submit'>Add Quote</Button>
+                        ) : (
+                            <div className='space-x-2'>
+                                <Button type='submit'>Update Quote</Button>
+                                <Button onClick={handleCancel}>Cancel</Button>
+                            </div>
+                        )}
                     </form>
                 </CardContent>
             </Card>
