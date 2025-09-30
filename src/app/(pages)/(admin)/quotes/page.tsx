@@ -8,8 +8,7 @@ import dbConnect from '@/lib/dbConnect';
 import { Quote } from '@/app/models/Quote';
 
 // ====== Components ====== //
-import QuotesForm from '@/components/forms/QuotesForm';
-import QuoteList from '@/components/forms/QuoteList';
+import QuotesClient from './QuotesClient';
 
 const QuotesPage = async () => {
     const session: Session | null = await getServerSession(authOptions);
@@ -19,15 +18,24 @@ const QuotesPage = async () => {
     }
 
     await dbConnect();
-    const quotes = await Quote.find({
+
+    const quotesData = await Quote.find({
         user: new Types.ObjectId(session.user.id),
     }).lean();
+
+    const quotes = quotesData.map((q: any) => ({
+        _id: q._id,
+        quote: q.quote,
+        author: q.author,
+        book: q.book,
+        user: q.user,
+        __v: q.__v,
+    }));
 
     return (
         <div className='space-y-4'>
             <h1 className='text-2xl font-bold mb-3'>Manage quotes</h1>
-            <QuotesForm />
-            <QuoteList quotes={quotes} />
+            <QuotesClient quotes={quotes} />
         </div>
     );
 };
