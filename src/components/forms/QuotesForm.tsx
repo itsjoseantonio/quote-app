@@ -16,11 +16,12 @@ import { Textarea } from '@/components/ui/textarea';
 
 // ====== Utils ====== //
 import { QuoteSchema } from '@/app/schemas/quote.schema';
+import { QuoteFormData } from '@/types';
 
 interface QuotesFormProps {
     mode?: 'create' | 'edit';
     initialValues?: any | null;
-    onSave?: (data: any) => void;
+    handleSave?: () => void;
     handleCancel?: () => void;
 }
 
@@ -33,12 +34,12 @@ const EMPTY_VALUES = {
 const QuotesForm = ({
     mode,
     initialValues,
-    onSave,
+    handleSave,
     handleCancel,
 }: QuotesFormProps) => {
     const {
         register,
-        handleSubmit: HS,
+        handleSubmit,
         formState: { errors },
         reset,
     } = useForm({
@@ -50,19 +51,16 @@ const QuotesForm = ({
         resolver: zodResolver(QuoteSchema),
     });
 
-    console.log(errors, 'errors');
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-
+    const HandleCreateQuote = async (data: QuoteFormData) => {
         try {
-            const response = await createQuote(formData);
+            const response = await createQuote(data);
 
             if (!response?.success) {
                 toast.error(response?.message || 'An error occurred');
             } else {
                 toast.success(response.message);
+                reset(EMPTY_VALUES);
+                handleSave?.();
             }
         } catch (error) {
             console.error(error, 'error');
@@ -84,12 +82,15 @@ const QuotesForm = ({
                     <CardTitle>Add New Quote</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <form onSubmit={HS(handleSubmit)} className='space-y-4'>
+                    <form
+                        onSubmit={handleSubmit(HandleCreateQuote)}
+                        className='space-y-4'
+                    >
                         <div>
                             <Label htmlFor='quote'>Quote</Label>
                             <Textarea id='quote' {...register('quote')} />
                             {errors?.quote?.message && (
-                                <span className='text-sm text-red-500'>
+                                <span className='text-xs text-red-500'>
                                     {String(errors.quote.message)}
                                 </span>
                             )}
@@ -98,7 +99,7 @@ const QuotesForm = ({
                             <Label htmlFor='author'>Author</Label>
                             <Input id='author' {...register('author')} />
                             {errors?.author?.message && (
-                                <span className='text-sm text-red-500'>
+                                <span className='text-xs text-red-500'>
                                     {String(errors.author.message)}
                                 </span>
                             )}
@@ -107,7 +108,7 @@ const QuotesForm = ({
                             <Label htmlFor='book'>Book</Label>
                             <Input id='book' {...register('book')} />
                             {errors?.book?.message && (
-                                <span className='text-sm text-red-500'>
+                                <span className='text-xs text-red-500'>
                                     {String(errors.book.message)}
                                 </span>
                             )}

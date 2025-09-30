@@ -38,6 +38,7 @@ const QuotesClient = ({ quotes }: QuotesClientProps) => {
                 mode={mode}
                 initialValues={editingQuote}
                 handleCancel={handleCancel}
+                handleSave={handleSave}
             />
             <QuoteList quotes={quotes} handleEdit={handleEdit} />
         </div>
