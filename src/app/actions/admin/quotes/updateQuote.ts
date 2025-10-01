@@ -8,7 +8,7 @@ import dbConnect from '@/lib/dbConnect';
 import { authOptions } from '@/lib/auth';
 import { Quote } from '@/app/models/Quote';
 
-export const createQuote = async (quoteData: QuoteFormData) => {
+export const updateQuote = async (id: string, quoteData: QuoteFormData) => {
     const { quote, author, book } = quoteData;
 
     if (!quote || !author || !book) {
@@ -26,33 +26,32 @@ export const createQuote = async (quoteData: QuoteFormData) => {
         if (!session) {
             return {
                 success: false,
-                message: 'You must be logged in to create a quote',
+                message: 'You must be logged in to update a quote',
             };
         }
 
-        const newQuote = await Quote.create({
-            quote,
-            author,
-            book,
-            user: session.user.id,
-        });
+        const updatedQuote = await Quote.findOneAndUpdate(
+            { _id: id, user: session.user.id },
+            { quote, author, book },
+            { new: true, runValidators: true },
+        );
 
-        const plainObj = {
-            ...newQuote.toObject(),
-            _id: newQuote._id.toString(),
-            user: newQuote.user.toString(),
-            createdAt: newQuote.createdAt.toISOString(),
-            updatedAt: newQuote.updatedAt.toISOString(),
-        };
+        if (!updatedQuote) {
+            return {
+                success: false,
+                message:
+                    'Quote not found or you do not have permission to update it',
+            };
+        }
 
         revalidatePath('/quotes');
 
         return {
             success: true,
-            message: 'Quote saved successfully',
-            data: plainObj,
+            message: 'Quote updated successfully',
+            data: updatedQuote,
         };
     } catch (error) {
-        console.log(error, 'Error saving quote');
+        console.log(error, 'Error updating quote');
     }
 };

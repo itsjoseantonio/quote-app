@@ -1,4 +1,5 @@
 'use client';
+
 import { useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
@@ -6,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 // ====== Server Actions ====== //
 import { createQuote } from '@/app/actions/admin/quotes/createQuote';
+import { updateQuote } from '@/app/actions/admin/quotes/updateQuote';
 
 // ====== Components ====== //
 import { Button } from '@/components/ui/button';
@@ -51,9 +53,26 @@ const QuotesForm = ({
         resolver: zodResolver(QuoteSchema),
     });
 
-    const HandleCreateQuote = async (data: QuoteFormData) => {
+    const handleCreateQuote = async (data: QuoteFormData) => {
         try {
             const response = await createQuote(data);
+
+            if (!response?.success) {
+                toast.error(response?.message || 'An error occurred');
+            } else {
+                toast.success(response.message);
+                reset(EMPTY_VALUES);
+                handleSave?.();
+            }
+        } catch (error) {
+            console.error(error, 'error');
+        }
+    };
+
+    const handleEditQuote = async (id: string, data: QuoteFormData) => {
+        console.log(id, data, '----------- handle Edit Quote');
+        try {
+            const response = await updateQuote(id, data);
 
             if (!response?.success) {
                 toast.error(response?.message || 'An error occurred');
@@ -73,8 +92,6 @@ const QuotesForm = ({
         }
     }, [initialValues]);
 
-    console.log(initialValues, 'initialValues');
-
     return (
         <div className='space-y-4'>
             <Card>
@@ -83,7 +100,13 @@ const QuotesForm = ({
                 </CardHeader>
                 <CardContent>
                     <form
-                        onSubmit={handleSubmit(HandleCreateQuote)}
+                        onSubmit={
+                            mode === 'edit'
+                                ? handleSubmit((data) =>
+                                      handleEditQuote(initialValues?._id, data),
+                                  )
+                                : handleSubmit(handleCreateQuote)
+                        }
                         className='space-y-4'
                     >
                         <div>

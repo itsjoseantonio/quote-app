@@ -15,9 +15,9 @@ interface QuotesClientProps {
 const QuotesClient = ({ quotes }: QuotesClientProps) => {
     const [mode, setMode] = useState<Mode>('create');
     const [editingQuote, setEditingQuote] = useState<Quote | null>(null);
-    console.log(editingQuote, 'editingQuote');
 
     const handleEdit = (quote: Quote) => {
+        console.log(quote, 'editing quote');
         setEditingQuote(quote);
         setMode('edit');
     };

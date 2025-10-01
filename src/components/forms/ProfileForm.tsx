@@ -4,7 +4,7 @@ import { FormEvent } from 'react';
 import { toast } from 'react-hot-toast';
 
 // ====== Server Actions ====== //
-import { updateProfile } from '@/app/actions/admin/updateProfile';
+import { updateProfile } from '@/app/actions/admin/profile/updateProfile';
 
 // ====== Components ====== //
 import { Button } from '@/components/ui/button';

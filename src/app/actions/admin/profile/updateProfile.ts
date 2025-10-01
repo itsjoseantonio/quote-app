@@ -9,7 +9,6 @@ import { User } from '@/app/models/User';
 export const updateProfile = async (formData: FormData) => {
     const name = formData.get('name');
     const bio = formData.get('bio');
-    console.log(formData, 'formData');
 
     await dbConnect();
 
@@ -26,7 +25,7 @@ export const updateProfile = async (formData: FormData) => {
                 {
                     email: session.user.email,
                 },
-                userInfo
+                userInfo,
             );
 
             return {
@@ -37,6 +36,4 @@ export const updateProfile = async (formData: FormData) => {
     } catch (error) {
         console.log(error, 'Error updating User');
     }
-
-    console.log(session);
 };
