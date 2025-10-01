@@ -6,6 +6,7 @@ import { authOptions } from '@/lib/auth';
 import { Session } from '@/types';
 import dbConnect from '@/lib/dbConnect';
 import { Quote } from '@/app/models/Quote';
+import { Quote as QuoteType } from '@/types';
 
 // ====== Components ====== //
 import QuotesClient from './QuotesClient';
@@ -23,14 +24,23 @@ const QuotesPage = async () => {
         user: new Types.ObjectId(session.user.id),
     }).lean();
 
-    const quotes = quotesData.map((q: any) => ({
-        _id: q._id,
-        quote: q.quote,
-        author: q.author,
-        book: q.book,
-        user: q.user,
-        __v: q.__v,
-    }));
+    const quotes = quotesData
+        .map((q: any) => ({
+            _id: q._id,
+            quote: q.quote,
+            author: q.author,
+            book: q.book,
+            user: q.user,
+            __v: q.__v,
+            createdAt: q.createdAt,
+            updatedAt: q.updatedAt,
+        }))
+        .sort(
+            (a: QuoteType, b: QuoteType) =>
+                b.createdAt!.getTime() - a.createdAt!.getTime(),
+        );
+
+    console.log(quotesData, 'quotessss');
 
     return (
         <div className='space-y-4'>

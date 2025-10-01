@@ -17,6 +17,7 @@ const ProfilePage = async () => {
     }
 
     await dbConnect();
+
     const userDoc = await User.findById(session.user.id);
 
     const user = {

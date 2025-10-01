@@ -16,6 +16,9 @@ export interface Quote {
     author: string;
     book: string;
     user: string;
+    createdAt?: Date;
+    updatedAt?: Date;
+    __v?: number;
 }
 
 export type QuoteFormData = Omit<Quote, '_id' | 'user'>;
