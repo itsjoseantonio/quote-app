@@ -3,6 +3,7 @@ import { Types } from 'mongoose';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { LuCalendarDays } from 'react-icons/lu';
+import { Quote as QuoteType } from '@/types';
 
 // ====== Models ====== //
 import { User } from '@/app/models/User';
@@ -25,9 +26,25 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
         _id: userDoc._id.toString(),
     };
 
-    const quotes = await Quote.find({
+    const quotesData = await Quote.find({
         user: user._id,
     }).lean();
+
+    const quotes = quotesData
+        .map((q: any) => ({
+            _id: q._id,
+            quote: q.quote,
+            author: q.author,
+            book: q.book,
+            user: q.user,
+            __v: q.__v,
+            createdAt: q.createdAt,
+            updatedAt: q.updatedAt,
+        }))
+        .sort(
+            (a: QuoteType, b: QuoteType) =>
+                b.createdAt!.getTime() - a.createdAt!.getTime(),
+        );
 
     const totalQuotes = await Quote.countDocuments({
         user: new Types.ObjectId(user._id),
@@ -59,12 +76,14 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
                     </div>
                 </div>
 
-                <div className='max-w-lg m-0 flex flex-col gap-3 pt-6'>
+                <div className='max-w-lg m-0 flex flex-col gap-4 pt-6'>
                     {quotes?.map((quote) => (
                         <QuoteCard
                             key={String(quote._id)}
                             quote={quote.quote}
                             author={quote.author}
+                            book={quote.book}
+                            createdAt={quote.createdAt}
                         />
                     ))}
                 </div>
