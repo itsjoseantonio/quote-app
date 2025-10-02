@@ -1,6 +1,7 @@
 import React from 'react';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
+import { Types } from 'mongoose';
 
 // ====== Components ====== //
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,6 +9,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 // ====== Auth ====== //
 import { authOptions } from '@/lib/auth';
 import { Session } from '@/types';
+import dbConnect from '@/lib/dbConnect';
+import { Quote } from '@/app/models/Quote';
 
 const AdminPage = async () => {
     const session: Session | null = await getServerSession(authOptions);
@@ -15,6 +18,20 @@ const AdminPage = async () => {
     if (!session) {
         redirect('/');
     }
+
+    await dbConnect();
+
+    const startDate = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000); // 30 days ago
+    const endDate = new Date();
+
+    const monthlyQuotes = await Quote.countDocuments({
+        user: new Types.ObjectId(session.user.id),
+        createdAt: { $gte: startDate, $lte: endDate },
+    });
+
+    const totalQuotes = await Quote.countDocuments({
+        user: new Types.ObjectId(session.user.id),
+    });
 
     return (
         <div className='space-y-4'>
@@ -27,9 +44,9 @@ const AdminPage = async () => {
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <div className='text-2xl font-bold'>127</div>
+                        <div className='text-2xl font-bold'>{totalQuotes}</div>
                         <p className='text-xs text-muted-foreground'>
-                            +12 from last month
+                            +{monthlyQuotes} from last month
                         </p>
                     </CardContent>
                 </Card>
