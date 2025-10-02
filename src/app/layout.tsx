@@ -1,17 +1,12 @@
 import type { Metadata } from 'next';
 import { Toaster } from 'react-hot-toast';
-import localFont from 'next/font/local';
+import { Inter } from 'next/font/google';
 import './globals.css';
 
-const geistSans = localFont({
-    src: '../assets/fonts/GeistVF.woff',
-    variable: '--font-geist-sans',
-    weight: '100 900',
-});
-const geistMono = localFont({
-    src: '../assets/fonts/GeistMonoVF.woff',
-    variable: '--font-geist-mono',
-    weight: '100 900',
+const inter = Inter({
+    subsets: ['latin'],
+    variable: '--font-inter',
+    weight: ['300', '400', '500', '700', '900'],
 });
 
 export const metadata: Metadata = {
@@ -26,9 +21,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang='en'>
-            <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-            >
+            <body className={`${inter.className} antialiased`}>
                 {children}
                 <Toaster />
             </body>
