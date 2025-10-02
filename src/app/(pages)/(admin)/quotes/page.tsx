@@ -40,8 +40,6 @@ const QuotesPage = async () => {
                 b.createdAt!.getTime() - a.createdAt!.getTime(),
         );
 
-    console.log(quotesData, 'quotessss');
-
     return (
         <div className='space-y-4'>
             <h1 className='text-2xl font-bold mb-3'>Manage quotes</h1>

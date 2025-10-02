@@ -1,9 +1,15 @@
 import dbConnect from '@/lib/dbConnect';
+import { Types } from 'mongoose';
+import { notFound } from 'next/navigation';
+import Image from 'next/image';
+import { LuCalendarDays } from 'react-icons/lu';
+
+// ====== Models ====== //
 import { User } from '@/app/models/User';
 import { Quote } from '@/app/models/Quote';
-import Image from 'next/image';
+
+// ====== Components ====== //
 import QuoteCard from '@/components/QuoteCard';
-import { notFound } from 'next/navigation';
 
 const ProfilePage = async ({ params }: { params: { username: string } }) => {
     await dbConnect();
@@ -23,10 +29,14 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
         user: user._id,
     }).lean();
 
+    const totalQuotes = await Quote.countDocuments({
+        user: new Types.ObjectId(user._id),
+    });
+
     return (
-        <div className='pt-3 pb-3 min-h-svh bg-[#eeeeee]'>
-            <div className='flex justify-center items-center flex-col'>
-                <div className='flex justify-center items-center flex-col pt-3 pb-3'>
+        <div className='pt-12 pb-8 min-h-svh bg-[#f7f8f9]'>
+            <div className='flex justify-center items-center flex-col max-w-lg mx-auto'>
+                <div className='flex pt-6 pb-6 gap-5 w-full border-b border-gray-200'>
                     <Image
                         src={user?.image}
                         alt={user?.name}
@@ -34,11 +44,22 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
                         height={100}
                         className='rounded-full mb-1 w-24 h-24'
                     />
-                    <h1 className='text-2xl'>{user?.name}</h1>
-                    <p className='opacity-80 text-base'>{user?.bio}</p>
+                    <div className='flex flex-col gap-1 text-[#4f4f4f]'>
+                        <h1 className='text-xl font-semibold'>{user?.name}</h1>
+                        <span className='block text-sm text-[#9b9b9b]'>{`@${user?.username}`}</span>
+                        <p className='opacity-80 text-sm'>{user?.bio}</p>
+                        <p className='text-xs flex items-center gap-1 text-[#9b9b9b]'>
+                            <LuCalendarDays />
+                            Joined June 2025
+                        </p>
+                        <p className='text-sm'>
+                            <strong className='font-bold'>{totalQuotes}</strong>{' '}
+                            Quotes
+                        </p>
+                    </div>
                 </div>
 
-                <div className='max-w-lg m-0 flex flex-col gap-3'>
+                <div className='max-w-lg m-0 flex flex-col gap-3 pt-6'>
                     {quotes?.map((quote) => (
                         <QuoteCard
                             key={String(quote._id)}
