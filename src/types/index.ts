@@ -18,6 +18,7 @@ export interface Quote {
     user: string;
     createdAt?: Date;
     updatedAt?: Date;
+    featured?: boolean;
     __v?: number;
 }
 

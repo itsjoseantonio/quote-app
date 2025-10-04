@@ -34,6 +34,11 @@ const UserSchema = new Schema(
         emailVerified: {
             type: Boolean,
         },
+        idFeaturedQuote: {
+            type: Schema.Types.ObjectId,
+            ref: 'Quote',
+            default: null,
+        },
     },
     { timestamps: true },
 );

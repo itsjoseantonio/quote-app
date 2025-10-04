@@ -9,7 +9,7 @@ import { authOptions } from '@/lib/auth';
 import { Quote } from '@/app/models/Quote';
 
 export const createQuote = async (quoteData: QuoteFormData) => {
-    const { quote, author, book } = quoteData;
+    const { quote, author, book, featured } = quoteData;
 
     if (!quote || !author || !book) {
         return {

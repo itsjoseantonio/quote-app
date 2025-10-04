@@ -28,7 +28,7 @@ const QuoteSchema = new Schema(
     },
     {
         timestamps: true,
-    }
+    },
 );
 
 export const Quote = models.Quote || model('Quote', QuoteSchema);
