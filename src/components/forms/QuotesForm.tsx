@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { toast } from 'react-hot-toast';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 // ====== Server Actions ====== //
@@ -15,6 +15,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { Switch } from '@/components/ui/switch';
 
 // ====== Utils ====== //
 import { QuoteSchema } from '@/app/schemas/quote.schema';
@@ -31,6 +32,7 @@ const EMPTY_VALUES = {
     quote: '',
     book: '',
     author: '',
+    featured: false,
 };
 
 const QuotesForm = ({
@@ -44,16 +46,17 @@ const QuotesForm = ({
         handleSubmit,
         formState: { errors },
         reset,
+        control,
+        watch,
     } = useForm({
         defaultValues: initialValues ?? {
-            quote: '',
-            book: '',
-            author: '',
+            ...EMPTY_VALUES,
         },
         resolver: zodResolver(QuoteSchema),
     });
 
     const handleCreateQuote = async (data: QuoteFormData) => {
+        console.log(data, '----------- handle Create Quote');
         try {
             const response = await createQuote(data);
 
@@ -109,6 +112,26 @@ const QuotesForm = ({
                         }
                         className='space-y-4'
                     >
+                        <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                            <div>
+                                <Label htmlFor='author'>Author</Label>
+                                <Input id='author' {...register('author')} />
+                                {errors?.author?.message && (
+                                    <span className='text-xs text-red-500'>
+                                        {String(errors.author.message)}
+                                    </span>
+                                )}
+                            </div>
+                            <div>
+                                <Label htmlFor='book'>Book</Label>
+                                <Input id='book' {...register('book')} />
+                                {errors?.book?.message && (
+                                    <span className='text-xs text-red-500'>
+                                        {String(errors.book.message)}
+                                    </span>
+                                )}
+                            </div>
+                        </div>
                         <div>
                             <Label htmlFor='quote'>Quote</Label>
                             <Textarea id='quote' {...register('quote')} />
@@ -119,22 +142,28 @@ const QuotesForm = ({
                             )}
                         </div>
                         <div>
-                            <Label htmlFor='author'>Author</Label>
-                            <Input id='author' {...register('author')} />
-                            {errors?.author?.message && (
-                                <span className='text-xs text-red-500'>
-                                    {String(errors.author.message)}
-                                </span>
-                            )}
-                        </div>
-                        <div>
-                            <Label htmlFor='book'>Book</Label>
-                            <Input id='book' {...register('book')} />
-                            {errors?.book?.message && (
-                                <span className='text-xs text-red-500'>
-                                    {String(errors.book.message)}
-                                </span>
-                            )}
+                            <div className='flex items-center space-x-2'>
+                                <Controller
+                                    control={control}
+                                    name='featured'
+                                    render={({ field }) => {
+                                        return (
+                                            <>
+                                                <Switch
+                                                    id='airplane-mode'
+                                                    checked={field.value}
+                                                    onCheckedChange={(
+                                                        val: boolean,
+                                                    ) => field.onChange(val)}
+                                                />
+                                                <Label htmlFor='airplane-mode'>
+                                                    Featured Quote
+                                                </Label>
+                                            </>
+                                        );
+                                    }}
+                                />
+                            </div>
                         </div>
                         {mode === 'create' ? (
                             <Button type='submit'>Add Quote</Button>
