@@ -7,9 +7,10 @@ import { Session, QuoteFormData } from '@/types';
 import dbConnect from '@/lib/dbConnect';
 import { authOptions } from '@/lib/auth';
 import { Quote } from '@/app/models/Quote';
+import { User } from '@/app/models/User';
 
 export const updateQuote = async (id: string, quoteData: QuoteFormData) => {
-    const { quote, author, book } = quoteData;
+    const { quote, author, book, featured } = quoteData;
 
     if (!quote || !author || !book) {
         return {
@@ -22,14 +23,14 @@ export const updateQuote = async (id: string, quoteData: QuoteFormData) => {
 
     const session: Session | null = await getServerSession(authOptions);
 
-    try {
-        if (!session) {
-            return {
-                success: false,
-                message: 'You must be logged in to update a quote',
-            };
-        }
+    if (!session) {
+        return {
+            success: false,
+            message: 'You must be logged in to update a quote',
+        };
+    }
 
+    try {
         const updatedQuote = await Quote.findOneAndUpdate(
             { _id: id, user: session.user.id },
             { quote, author, book },
@@ -42,6 +43,20 @@ export const updateQuote = async (id: string, quoteData: QuoteFormData) => {
                 message:
                     'Quote not found or you do not have permission to update it',
             };
+        }
+
+        if (featured) {
+            const userUpdated = await User.findByIdAndUpdate(
+                session.user.id,
+                {
+                    featuredQuoteId: updatedQuote._id,
+                },
+                { new: true, runValidators: true },
+            );
+
+            if (!userUpdated) {
+                throw new Error('Error updating user with featured quote');
+            }
         }
 
         revalidatePath('/quotes');

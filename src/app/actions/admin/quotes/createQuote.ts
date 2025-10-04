@@ -7,6 +7,7 @@ import { Session, QuoteFormData } from '@/types';
 import dbConnect from '@/lib/dbConnect';
 import { authOptions } from '@/lib/auth';
 import { Quote } from '@/app/models/Quote';
+import { User } from '@/app/models/User';
 
 export const createQuote = async (quoteData: QuoteFormData) => {
     const { quote, author, book, featured } = quoteData;
@@ -22,20 +23,41 @@ export const createQuote = async (quoteData: QuoteFormData) => {
 
     const session: Session | null = await getServerSession(authOptions);
 
-    try {
-        if (!session) {
-            return {
-                success: false,
-                message: 'You must be logged in to create a quote',
-            };
-        }
+    if (!session) {
+        return {
+            success: false,
+            message: 'You must be logged in to create a quote',
+        };
+    }
 
+    try {
         const newQuote = await Quote.create({
             quote,
             author,
             book,
             user: session.user.id,
         });
+
+        if (!newQuote) {
+            return {
+                success: false,
+                message: 'Error creating quote',
+            };
+        }
+
+        if (featured) {
+            const userUpdated = await User.findByIdAndUpdate(
+                session.user.id,
+                {
+                    featuredQuoteId: newQuote._id,
+                },
+                { new: true, runValidators: true },
+            );
+
+            if (!userUpdated) {
+                throw new Error('Error updating user with featured quote');
+            }
+        }
 
         const plainObj = {
             ...newQuote.toObject(),
