@@ -7,6 +7,7 @@ import { Session } from '@/types';
 import dbConnect from '@/lib/dbConnect';
 import { Quote } from '@/app/models/Quote';
 import { Quote as QuoteType } from '@/types';
+import { User } from '@/app/models/User';
 
 // ====== Components ====== //
 import QuotesClient from './QuotesClient';
@@ -19,6 +20,8 @@ const QuotesPage = async () => {
     }
 
     await dbConnect();
+
+    const user = await User.findById(session.user.id);
 
     const quotesData = await Quote.find({
         user: new Types.ObjectId(session.user.id),
@@ -34,6 +37,7 @@ const QuotesPage = async () => {
             __v: q.__v,
             createdAt: q.createdAt,
             updatedAt: q.updatedAt,
+            featured: q._id.toString() === user?.featuredQuoteId?.toString(),
         }))
         .sort(
             (a: QuoteType, b: QuoteType) =>

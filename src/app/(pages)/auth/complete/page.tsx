@@ -10,7 +10,6 @@ import CompleteForm from '@/components/forms/CompleteForm';
 const CompletePage = async () => {
     const session: Session | null = await getServerSession(authOptions);
 
-    console.log(session, 'Complete form');
     return (
         <>
             <div className='flex flex-col items-center gap-1'>

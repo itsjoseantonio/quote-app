@@ -73,7 +73,6 @@ const QuotesForm = ({
     };
 
     const handleEditQuote = async (id: string, data: QuoteFormData) => {
-        console.log(id, data, '----------- handle Edit Quote');
         try {
             const response = await updateQuote(id, data);
 
@@ -166,7 +165,7 @@ const QuotesForm = ({
                             </div>
                         </div>
                         {mode === 'create' ? (
-                            <Button type='submit'>Add Quote</Button>
+                            <Button type='submit'>Create Quote</Button>
                         ) : (
                             <div className='space-x-2'>
                                 <Button type='submit'>Update Quote</Button>
@@ -175,6 +174,7 @@ const QuotesForm = ({
                                         handleCancel?.();
                                         reset(EMPTY_VALUES);
                                     }}
+                                    variant='outline'
                                 >
                                     Cancel
                                 </Button>

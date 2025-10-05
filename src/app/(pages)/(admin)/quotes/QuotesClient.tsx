@@ -17,7 +17,6 @@ const QuotesClient = ({ quotes }: QuotesClientProps) => {
     const [editingQuote, setEditingQuote] = useState<Quote | null>(null);
 
     const handleEdit = (quote: Quote) => {
-        console.log(quote, 'editing quote');
         setEditingQuote(quote);
         setMode('edit');
     };

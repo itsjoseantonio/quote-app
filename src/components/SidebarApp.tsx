@@ -39,7 +39,6 @@ const items = [
 
 const SidebarApp = async () => {
     const session: Session | null = await getServerSession(authOptions);
-    console.log(session, 'session');
 
     return (
         <Sidebar>
