@@ -7,33 +7,35 @@ import {
     SidebarContent,
     SidebarGroup,
     SidebarGroupContent,
-    SidebarGroupLabel,
     SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
     SidebarHeader,
     SidebarFooter,
 } from '@/components/ui/sidebar';
 import LogoutButton from '@/components/buttons/LogoutButton';
+import AdminMenu from './AdminMenu';
 
 import { authOptions } from '@/lib/auth';
 import { Session } from '@/types';
 
 // ====== Assets ====== //
 import User from '@/assets/images/user.png';
+import { FaHome, FaQuoteLeft, FaUser } from 'react-icons/fa';
 
 const items = [
     {
         title: 'Home',
         url: '/admin',
+        icon: <FaHome />,
     },
     {
         title: 'Quotes',
         url: '/quotes',
+        icon: <FaQuoteLeft />,
     },
     {
         title: 'Profile',
         url: '/profile',
+        icon: <FaUser />,
     },
 ];
 
@@ -49,23 +51,9 @@ const SidebarApp = async () => {
             </SidebarHeader>
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupLabel className='text-sm'>
-                        Application
-                    </SidebarGroupLabel>
                     <SidebarGroupContent className='py-2'>
-                        <SidebarMenu>
-                            {items.map((item) => (
-                                <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton
-                                        asChild
-                                        className='text-base h-9'
-                                    >
-                                        <Link href={item.url}>
-                                            <span>{item.title}</span>
-                                        </Link>
-                                    </SidebarMenuButton>
-                                </SidebarMenuItem>
-                            ))}
+                        <SidebarMenu className='gap-2'>
+                            <AdminMenu items={items} />
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>
