@@ -39,21 +39,23 @@ const ProfileForm = ({ user }: Session) => {
             </CardHeader>
             <CardContent>
                 <form className='space-y-4' onSubmit={handleUpdateProfile}>
-                    <div>
-                        <Label htmlFor='name'>Name</Label>
-                        <Input
-                            id='name'
-                            name='name'
-                            defaultValue={user?.name}
-                        />
-                    </div>
-                    <div>
-                        <Label htmlFor='username'>Username</Label>
-                        <Input
-                            id='username'
-                            defaultValue={user?.username}
-                            disabled
-                        />
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                        <div>
+                            <Label htmlFor='name'>Name</Label>
+                            <Input
+                                id='name'
+                                name='name'
+                                defaultValue={user?.name}
+                            />
+                        </div>
+                        <div>
+                            <Label htmlFor='username'>Username</Label>
+                            <Input
+                                id='username'
+                                defaultValue={user?.username}
+                                disabled
+                            />
+                        </div>
                     </div>
                     <div>
                         <Label htmlFor='email'>Email</Label>

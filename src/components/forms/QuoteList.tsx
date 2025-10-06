@@ -43,7 +43,7 @@ const QuoteList = ({ quotes, handleEdit }: QuoteListProps) => {
         <>
             <Card>
                 <CardHeader>
-                    <CardTitle>Existing Quotes</CardTitle>
+                    <CardTitle>My Quotes</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <ul className='space-y-2'>
