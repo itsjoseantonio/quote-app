@@ -12,6 +12,8 @@ import { Quote } from '@/app/models/Quote';
 // ====== Components ====== //
 import QuoteCard from '@/components/QuoteCard';
 
+import { TiPin } from 'react-icons/ti';
+
 const ProfilePage = async ({ params }: { params: { username: string } }) => {
     await dbConnect();
     const { username } = params;
@@ -40,6 +42,7 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
             __v: q.__v,
             createdAt: q.createdAt,
             updatedAt: q.updatedAt,
+            featured: q._id.toString() === user?.featuredQuoteId?.toString(),
         }))
         .sort(
             (a: QuoteType, b: QuoteType) =>
@@ -49,6 +52,8 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
     const totalQuotes = await Quote.countDocuments({
         user: new Types.ObjectId(user._id),
     });
+
+    const featuredQuote = quotes.find((quote) => quote.featured);
 
     return (
         <div className='pt-12 pb-8 min-h-svh bg-[#f7f8f9]'>
@@ -76,16 +81,39 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
                     </div>
                 </div>
 
-                <div className='max-w-lg m-0 flex flex-col gap-4 pt-6'>
-                    {quotes?.map((quote) => (
+                {featuredQuote && (
+                    <div className='pt-6 pb-6 w-full border-b border-gray-200 relative'>
                         <QuoteCard
-                            key={String(quote._id)}
-                            quote={quote.quote}
-                            author={quote.author}
-                            book={quote.book}
-                            createdAt={quote.createdAt}
+                            quote={featuredQuote.quote}
+                            author={featuredQuote.author}
+                            book={featuredQuote.book}
+                            createdAt={featuredQuote.createdAt}
                         />
-                    ))}
+                        <span className='absolute top-2 right-2 text-xs font-weight text-gray-400 flex items-center gap-1'>
+                            <TiPin />
+                            Pinned
+                        </span>
+                    </div>
+                )}
+
+                <div className='max-w-lg m-0 flex flex-col gap-4 pt-6'>
+                    {quotes
+                        ?.filter((quote) => !quote.featured)
+                        .map((quote) => (
+                            <QuoteCard
+                                key={String(quote._id)}
+                                quote={quote.quote}
+                                author={quote.author}
+                                book={quote.book}
+                                createdAt={quote.createdAt}
+                            />
+                        ))}
+                    {quotes?.filter((quote) => !quote.featured).length ===
+                        0 && (
+                        <p className='text-center text-gray-500'>
+                            No quotes found.
+                        </p>
+                    )}
                 </div>
             </div>
         </div>
