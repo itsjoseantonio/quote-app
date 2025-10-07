@@ -16,10 +16,16 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 // ====== Utils ====== //
 import { QuoteSchema } from '@/app/schemas/quote.schema';
 import { QuoteFormData } from '@/types';
+import { FiInfo } from 'react-icons/fi';
 
 interface QuotesFormProps {
     mode?: 'create' | 'edit';
@@ -88,6 +94,19 @@ const QuotesForm = ({
         }
     };
 
+    const FeaturedInfoTooltip = () => {
+        return (
+            <Tooltip>
+                <TooltipTrigger>
+                    <FiInfo className='cursor-pointer' />
+                </TooltipTrigger>
+                <TooltipContent>
+                    <p>This will replace your current featured quote.</p>
+                </TooltipContent>
+            </Tooltip>
+        );
+    };
+
     useEffect(() => {
         if (initialValues) {
             reset(initialValues);
@@ -149,14 +168,18 @@ const QuotesForm = ({
                                         return (
                                             <>
                                                 <Switch
-                                                    id='airplane-mode'
+                                                    id='featured'
                                                     checked={field.value}
                                                     onCheckedChange={(
                                                         val: boolean,
                                                     ) => field.onChange(val)}
                                                 />
-                                                <Label htmlFor='airplane-mode'>
+                                                <Label
+                                                    htmlFor='featured'
+                                                    className='flex items-center gap-1'
+                                                >
                                                     Featured Quote
+                                                    <FeaturedInfoTooltip />
                                                 </Label>
                                             </>
                                         );
