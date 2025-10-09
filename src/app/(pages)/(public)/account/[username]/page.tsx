@@ -12,6 +12,8 @@ import { Quote } from '@/app/models/Quote';
 // ====== Components ====== //
 import QuoteCard from '@/components/QuoteCard';
 
+// ====== Assets ====== //
+import Logo from '@/assets/icons/logo-mini.png';
 import { TiPin } from 'react-icons/ti';
 
 const ProfilePage = async ({ params }: { params: { username: string } }) => {
@@ -56,9 +58,14 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
     const featuredQuote = quotes.find((quote) => quote.featured);
 
     return (
-        <div className='pt-12 pb-8 min-h-svh bg-[#f7f8f9]'>
+        <div className='pb-8 min-h-svh bg-[#f7f8f9]'>
+            <header className='w-full px-6 py-3'>
+                <div>
+                    <Image src={Logo} alt='Quotely' width={48} height={48} />
+                </div>
+            </header>
             <div className='flex justify-center items-center flex-col max-w-lg mx-auto'>
-                <div className='flex pt-6 pb-6 gap-5 w-full border-b border-gray-200'>
+                <div className='flex pt-4 pb-6 gap-5 w-full border-b border-gray-200'>
                     <Image
                         src={user?.image}
                         alt={user?.name}
