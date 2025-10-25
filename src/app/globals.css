@@ -85,9 +85,9 @@ body {
         --sidebar-accent-foreground: 240 4.8% 95.9%;
         --sidebar-border: 240 3.7% 15.9%;
         --sidebar-ring: 217.2 91.2% 59.8%;
-        --richBlack: #f2f4f3;
+        --richBlack: #0a0908;
         --charcoal: #22333b;
-        --lightGray: #0a0908;
+        --lightGray: #f2f4f3;
         --coffee: #a9927d;
     }
 }
