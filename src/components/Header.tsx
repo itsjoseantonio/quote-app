@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { authOptions } from '@/lib/auth';
 import { getServerSession } from 'next-auth';
+import ThemeToggle from './ThemeToggle';
 import Link from 'next/link';
 
 const Header = async () => {
@@ -23,6 +24,7 @@ const Header = async () => {
                             </Button>
                         </>
                     )}
+                    <ThemeToggle />
                 </div>
             </div>
         </header>
