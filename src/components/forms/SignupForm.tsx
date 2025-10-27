@@ -78,10 +78,10 @@ const SignupForm = () => {
                     </div>
                 </CardContent>
                 <CardFooter className='flex flex-col gap-3'>
-                    <Button className='w-full' type='submit'>
+                    <Button className='w-full bg-coffee' type='submit'>
                         Submit
                     </Button>
-                    <Button variant='outline' className='w-full font-bold   '>
+                    <Button variant='outline' className='w-full font-bold'>
                         <FcGoogle size={20} />
                         Sign up with Google
                     </Button>

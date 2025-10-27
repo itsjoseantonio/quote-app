@@ -16,7 +16,7 @@ const Header = async () => {
             <div className='container mx-auto px-4 flex justify-between items-center'>
                 <h1 className='text-2xl font-bold text-gray-800'>Quotely</h1>
                 <div className='flex gap-4 items-center'>
-                    <ThemeToggle />
+                    {/** <ThemeToggle /> */}
                     {session ? (
                         <div></div>
                     ) : (

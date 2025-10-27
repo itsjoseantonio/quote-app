@@ -74,7 +74,7 @@ const LoginForm = () => {
                     </div>
                 </CardContent>
                 <CardFooter className='flex flex-col gap-3 pb-0'>
-                    <Button className='w-full'>Submit</Button>
+                    <Button className='w-full bg-coffee'>Submit</Button>
                 </CardFooter>
             </form>
             <div className='p-6 pt-3'>

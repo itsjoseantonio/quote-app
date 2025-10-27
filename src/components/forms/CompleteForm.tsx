@@ -60,7 +60,7 @@ const CompleteForm = () => {
                     </div>
                 </CardContent>
                 <CardFooter className='flex flex-col gap-3'>
-                    <Button className='w-full'>Continue</Button>
+                    <Button className='w-full bg-coffee'>Continue</Button>
                 </CardFooter>
             </form>
         </Card>
