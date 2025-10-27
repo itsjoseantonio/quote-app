@@ -1,7 +1,11 @@
 const Footer = () => {
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
     return (
-        <footer>
-            <div className='container mx-auto px-4'>Footer</div>
+        <footer className='bg-coffee py-5 text-white'>
+            <div className='container mx-auto px-4 text-sm'>
+                &copy; {currentYear} All rights reserved
+            </div>
         </footer>
     );
 };

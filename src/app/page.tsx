@@ -28,7 +28,10 @@ export default async function HomePage() {
             <main>
                 <section className='mx-auto px-4 h-[calc(100vh-60px)] bg-[url("/images/main-banner.jpeg")] bg-cover flex items-center justify-center w-full'>
                     <div className='max-w-5xl text-center'>
-                        <h1 className='font-bold text-5xl mb-6 max-w-4xl mx-auto text-white'>
+                        <h1
+                            className='font-bold text-5xl mb-6 max-w-4xl mx-auto text-white text-shadow-xs'
+                            style={{ textShadow: '1px 1px 3px rgba(0,0,0,.4)' }}
+                        >
                             Books do not change people; paragraphs do, Sometimes
                             even sentences.
                         </h1>
@@ -45,7 +48,7 @@ export default async function HomePage() {
                         </Button>
                     </div>
                 </section>
-                <section className='bg-lightGray py-24'>
+                <section className='bg-lightGray py-28'>
                     <div className='text-center mb-16'>
                         <h2 className='text-3xl font-bold mb-2'>
                             How it works
@@ -57,7 +60,12 @@ export default async function HomePage() {
                     </div>
                     <div className='grid gap-12 text-center md:grid-cols-3'>
                         <div className='flex flex-col items-center text-richBlack'>
-                            <div className='mb-3 text-coffee w-[34px] h-[34px] flex items-center justify-center rounded-full bg-coffee/50'>
+                            <div
+                                className='mb-3 text-coffee w-[44px] h-[44px] flex items-center justify-center rounded-full'
+                                style={{
+                                    backgroundColor: 'rgba(169, 146, 125, .5)',
+                                }}
+                            >
                                 <LuUserCheck fontSize={24} />
                             </div>
                             <h3 className='text-xl font-semibold mb-3'>
@@ -69,7 +77,12 @@ export default async function HomePage() {
                             </p>
                         </div>
                         <div className='flex flex-col items-center text-richBlack'>
-                            <div className='mb-3 text-coffee w-[34px] h-[34px] flex items-center justify-center rounded-full bg-coffee/50'>
+                            <div
+                                className='mb-3 text-coffee w-[44px] h-[44px] flex items-center justify-center rounded-full'
+                                style={{
+                                    backgroundColor: 'rgba(169, 146, 125, .5)',
+                                }}
+                            >
                                 <PiQuotesBold fontSize={24} />
                             </div>
                             <h3 className='text-xl font-semibold mb-3'>
@@ -81,7 +94,12 @@ export default async function HomePage() {
                             </p>
                         </div>
                         <div className='flex flex-col items-center text-richBlack'>
-                            <div className='mb-3 text-coffee w-[34px] h-[34px] flex items-center justify-center rounded-full bg-coffee/50'>
+                            <div
+                                className='mb-3 text-coffee w-[44px] h-[44px] flex items-center justify-center rounded-full'
+                                style={{
+                                    backgroundColor: 'rgba(169, 146, 125, .5)',
+                                }}
+                            >
                                 <RiShareLine fontSize={24} />
                             </div>
                             <h3 className='text-xl font-semibold mb-3'>
@@ -92,6 +110,19 @@ export default async function HomePage() {
                                 followers on any platform
                             </p>
                         </div>
+                    </div>
+                </section>
+                <section className='bg-white'>
+                    <div className='py-28 text-center'>
+                        <h2 className='text-3xl font-bold mb-4'>
+                            Ready to start Sharing?
+                        </h2>
+                        <Button
+                            variant='outline'
+                            className='bg-coffee text-white rounded-3xl text-xl py-5 px-6 border-none'
+                        >
+                            <Link href='/auth/signup'>Get started</Link>
+                        </Button>
                     </div>
                 </section>
             </main>
