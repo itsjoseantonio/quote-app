@@ -12,6 +12,10 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import ConfirmModal from '@/components/modals/ConfirmModal';
 
+// ====== Assets ======= //
+import { FiEdit } from 'react-icons/fi';
+import { RiDeleteBin6Line } from 'react-icons/ri';
+
 interface QuoteListProps {
     quotes: Quote[];
     handleEdit?: (quote: Quote) => void;
@@ -52,9 +56,12 @@ const QuoteList = ({ quotes, handleEdit }: QuoteListProps) => {
                                 className='flex items-center justify-between p-2 bg-gray-100 rounded'
                                 key={quote._id}
                             >
-                                <span>
-                                    {quote.quote} - {quote.author}
-                                </span>
+                                <p>
+                                    {quote.quote}
+                                    <span className='text-xs opacity-75 inline-block ml-1'>
+                                        - {quote.author}
+                                    </span>
+                                </p>
                                 <div>
                                     <Button
                                         variant='ghost'
@@ -65,7 +72,7 @@ const QuoteList = ({ quotes, handleEdit }: QuoteListProps) => {
                                                 : undefined
                                         }
                                     >
-                                        Edit
+                                        <FiEdit />
                                     </Button>
                                     <Button
                                         variant='ghost'
@@ -76,7 +83,7 @@ const QuoteList = ({ quotes, handleEdit }: QuoteListProps) => {
                                             setShowModal(true);
                                         }}
                                     >
-                                        Delete
+                                        <RiDeleteBin6Line />
                                     </Button>
                                 </div>
                             </li>
