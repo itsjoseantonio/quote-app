@@ -8,8 +8,6 @@ export const login = async (formData: FormData) => {
     const email = formData.get('email');
     const password = formData.get('password');
 
-    console.log({ email, password }, 'email and password');
-
     if (!email || !password) {
         throw new Error('Email and password are required');
     }
@@ -18,7 +16,6 @@ export const login = async (formData: FormData) => {
 
     try {
         const user = await User.findOne({ email });
-        console.log(user, 'USER');
 
         if (!user) {
             return {
@@ -29,7 +26,7 @@ export const login = async (formData: FormData) => {
 
         const isPasswordValid = await bcrypt.compare(
             password.toString(),
-            user.password
+            user.password,
         );
 
         if (!isPasswordValid) {

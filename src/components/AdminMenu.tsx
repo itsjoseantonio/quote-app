@@ -18,7 +18,7 @@ interface AdminMenuItems {
 
 const AdminMenu = ({ items }: AdminMenuItems) => {
     const pathname = usePathname();
-    console.log('Pathname:', pathname);
+
     return (
         <>
             {items.map((item: AdminMenuProps) => (

@@ -62,7 +62,6 @@ const QuotesForm = ({
     });
 
     const handleCreateQuote = async (data: QuoteFormData) => {
-        console.log(data, '----------- handle Create Quote');
         try {
             const response = await createQuote(data);
 
