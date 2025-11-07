@@ -1,12 +1,12 @@
 import Link from 'next/link';
 
 // ======= Components ======= //
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
-import { Button } from '@/components/ui/button';
+import Footer from '@/shared/components/Footer';
+import Header from '@/shared/components/Header';
+import { Button } from '@/shared/components/ui/button';
 
 // ======= Auth ======= //
-import { authOptions } from '@/lib/auth';
+import { authOptions } from '@/shared/lib/auth';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 
