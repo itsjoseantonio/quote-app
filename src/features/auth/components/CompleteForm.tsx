@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 
 // ====== Server Actions ====== //
-import { completeRegister } from '@/app/actions/auth/complete';
+import { completeRegister } from '@/features/auth/actions/complete';
 
 // ====== Components ====== //
 import {

@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 
 // ====== Server Actions ====== //
-import { signup } from '@/app/actions/auth/signup';
+import { signup } from '@/features/auth/actions/signup';
 
 // ====== Components ====== //
 import {
