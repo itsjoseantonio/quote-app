@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 
 import { authOptions } from '@/shared/lib/auth';
-import { Session } from '@/types';
+import { Session } from '@/shared/types';
 
 // ====== Components ====== //
 import LoginForm from '@/features/auth/components/LoginForm';

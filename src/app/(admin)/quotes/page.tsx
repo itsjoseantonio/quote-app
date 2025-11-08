@@ -3,10 +3,10 @@ import { redirect } from 'next/navigation';
 import { Types } from 'mongoose';
 
 import { authOptions } from '@/shared/lib/auth';
-import { Session } from '@/types';
+import { Session } from '@/shared/types';
 import dbConnect from '@/shared/lib/dbConnect';
 import { Quote } from '@/features/admin/quotes/models/Quote';
-import { Quote as QuoteType } from '@/types';
+import { Quote as QuoteType } from '@/shared/types';
 import { User } from '@/features/admin/profile/models/User';
 
 // ====== Components ====== //

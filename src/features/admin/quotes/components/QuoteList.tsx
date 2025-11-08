@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 
 import { deleteQuote } from '@/features/admin/quotes/actions/deleteQuote';
-import { Quote } from '@/types';
+import { Quote } from '@/shared/types';
 
 // ====== Components ====== //
 import { Button } from '@/shared/components/ui/button';

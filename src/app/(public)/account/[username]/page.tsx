@@ -3,14 +3,14 @@ import { Types } from 'mongoose';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { LuCalendarDays } from 'react-icons/lu';
-import { Quote as QuoteType } from '@/types';
+import { Quote as QuoteType } from '@/shared/types';
 
 // ====== Models ====== //
 import { User } from '@/features/admin/profile/models/User';
 import { Quote } from '@/features/admin/quotes/models/Quote';
 
 // ====== Components ====== //
-import QuoteCard from '@/shared/components/QuoteCard';
+import QuoteCard from '@/features/public/account/components/QuoteCard';
 
 // ====== Assets ====== //
 import Logo from '@/shared/assets/icons/logo-mini.png';

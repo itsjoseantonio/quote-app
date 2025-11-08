@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
 // ======= Components ======= //
-import Footer from '@/shared/components/Footer';
-import Header from '@/shared/components/Header';
+import Footer from '@/shared/components/layout/Footer';
+import Header from '@/shared/components/layout/Header';
 import { Button } from '@/shared/components/ui/button';
 
 // ======= Auth ======= //

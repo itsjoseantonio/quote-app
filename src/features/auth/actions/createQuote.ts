@@ -3,7 +3,7 @@
 import { getServerSession } from 'next-auth';
 import { revalidatePath } from 'next/cache';
 
-import { Session, QuoteFormData } from '@/types';
+import { Session, QuoteFormData } from '@/shared/types';
 import dbConnect from '@/shared/lib/dbConnect';
 import { authOptions } from '@/shared/lib/auth';
 import { Quote } from '@/features/admin/quotes/models/Quote';

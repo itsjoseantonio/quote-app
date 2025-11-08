@@ -13,7 +13,7 @@ import {
 
 // ====== Auth ====== //
 import { authOptions } from '@/shared/lib/auth';
-import { Session } from '@/types';
+import { Session } from '@/shared/types';
 import dbConnect from '@/shared/lib/dbConnect';
 import { Quote } from '@/features/admin/quotes/models/Quote';
 

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-import { Quote } from '@/types';
+import { Quote } from '@/shared/types';
 import QuotesForm from '@/features/admin/quotes/components/QuotesForm';
 import QuoteList from '@/features/admin/quotes/components/QuoteList';
 

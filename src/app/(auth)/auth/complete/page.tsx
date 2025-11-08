@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 
 import { authOptions } from '@/shared/lib/auth';
-import { Session } from '@/types';
+import { Session } from '@/shared/types';
 
 // ====== Components ====== //
 import CompleteForm from '@/features/auth/components/CompleteForm';

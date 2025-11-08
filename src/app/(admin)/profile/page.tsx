@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 
-import { Session } from '@/types';
+import { Session } from '@/shared/types';
 import { authOptions } from '@/shared/lib/auth';
 import { User } from '@/features/admin/profile/models/User';
 import dbConnect from '@/shared/lib/dbConnect';

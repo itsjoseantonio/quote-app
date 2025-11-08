@@ -1,6 +1,6 @@
 'use server';
 
-import { Session } from '@/types';
+import { Session } from '@/shared/types';
 import dbConnect from '@/shared/lib/dbConnect';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/shared/lib/auth';

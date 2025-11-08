@@ -1,5 +1,5 @@
 import { SidebarProvider } from '@/shared/components/ui/sidebar';
-import SidebarApp from '@/shared/components/SidebarApp';
+import SidebarApp from '@/features/admin/components/SidebarApp';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
     return (

@@ -29,7 +29,7 @@ import {
 
 // ====== Utils ====== //
 import { QuoteSchema } from '@/features/admin/quotes/schemas/quote.schema';
-import { QuoteFormData } from '@/types';
+import { QuoteFormData } from '@/shared/types';
 import { FiInfo } from 'react-icons/fi';
 
 interface QuotesFormProps {
