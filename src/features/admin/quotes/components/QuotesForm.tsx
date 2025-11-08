@@ -28,7 +28,7 @@ import {
 } from '@/shared/components/ui/tooltip';
 
 // ====== Utils ====== //
-import { QuoteSchema } from '@/app/schemas/quote.schema';
+import { QuoteSchema } from '@/features/admin/quotes/schemas/quote.schema';
 import { QuoteFormData } from '@/types';
 import { FiInfo } from 'react-icons/fi';
 

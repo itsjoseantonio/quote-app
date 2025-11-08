@@ -4,10 +4,10 @@ import { getServerSession } from 'next-auth';
 import { revalidatePath } from 'next/cache';
 
 import dbConnect from '@/shared/lib/dbConnect';
-import { Quote } from '@/app/models/Quote';
+import { Quote } from '@/features/admin/quotes/models/Quote';
 import { authOptions } from '@/shared/lib/auth';
 import { Session } from '@/types';
-import { User } from '@/app/models/User';
+import { User } from '@/features/admin/profile/models/User';
 
 export const deleteQuote = async (quoteId: string) => {
     const session: Session | null = await getServerSession(authOptions);

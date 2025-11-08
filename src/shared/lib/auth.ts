@@ -4,7 +4,7 @@ import Google from 'next-auth/providers/google';
 import client from './mongoDB';
 import Credentials from 'next-auth/providers/credentials';
 import dbConnect from './dbConnect';
-import { User } from '@/app/models/User';
+import { User } from '@/features/admin/profile/models/User';
 import bcrypt from 'bcrypt';
 
 export const authOptions: AuthOptions = {
@@ -38,7 +38,7 @@ export const authOptions: AuthOptions = {
 
                     const isPasswordValid = await bcrypt.compare(
                         password,
-                        user.password
+                        user.password,
                     );
 
                     if (!isPasswordValid) {

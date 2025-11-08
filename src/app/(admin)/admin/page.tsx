@@ -15,7 +15,7 @@ import {
 import { authOptions } from '@/shared/lib/auth';
 import { Session } from '@/types';
 import dbConnect from '@/shared/lib/dbConnect';
-import { Quote } from '@/app/models/Quote';
+import { Quote } from '@/features/admin/quotes/models/Quote';
 
 const AdminPage = async () => {
     const session: Session | null = await getServerSession(authOptions);

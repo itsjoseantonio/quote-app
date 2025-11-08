@@ -6,8 +6,8 @@ import { revalidatePath } from 'next/cache';
 import { Session, QuoteFormData } from '@/types';
 import dbConnect from '@/shared/lib/dbConnect';
 import { authOptions } from '@/shared/lib/auth';
-import { Quote } from '@/app/models/Quote';
-import { User } from '@/app/models/User';
+import { Quote } from '@/features/admin/quotes/models/Quote';
+import { User } from '@/features/admin/profile/models/User';
 
 export const createQuote = async (quoteData: QuoteFormData) => {
     const { quote, author, book, featured } = quoteData;

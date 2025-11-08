@@ -6,8 +6,8 @@ import { LuCalendarDays } from 'react-icons/lu';
 import { Quote as QuoteType } from '@/types';
 
 // ====== Models ====== //
-import { User } from '@/app/models/User';
-import { Quote } from '@/app/models/Quote';
+import { User } from '@/features/admin/profile/models/User';
+import { Quote } from '@/features/admin/quotes/models/Quote';
 
 // ====== Components ====== //
 import QuoteCard from '@/shared/components/QuoteCard';

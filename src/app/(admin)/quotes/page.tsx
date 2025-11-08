@@ -5,9 +5,9 @@ import { Types } from 'mongoose';
 import { authOptions } from '@/shared/lib/auth';
 import { Session } from '@/types';
 import dbConnect from '@/shared/lib/dbConnect';
-import { Quote } from '@/app/models/Quote';
+import { Quote } from '@/features/admin/quotes/models/Quote';
 import { Quote as QuoteType } from '@/types';
-import { User } from '@/app/models/User';
+import { User } from '@/features/admin/profile/models/User';
 
 // ====== Components ====== //
 import QuotesClient from '@/features/admin/quotes/components/QuotesClient';

@@ -4,7 +4,7 @@ import { Session } from '@/types';
 import dbConnect from '@/shared/lib/dbConnect';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/shared/lib/auth';
-import { User } from '@/app/models/User';
+import { User } from '@/features/admin/profile/models/User';
 
 export const updateProfile = async (formData: FormData) => {
     const name = formData.get('name');
